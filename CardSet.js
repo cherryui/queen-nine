@@ -7,6 +7,7 @@ export default class CardSet extends React.Component {
     // define the different avatars
     const spade = (
       <Avatar
+        onPress={() => this.props.handleSuitClick('spade')}
         containerStyle={styles.cardButton}
         source={require('./icons/spade.png')}
         large
@@ -16,6 +17,7 @@ export default class CardSet extends React.Component {
 
     const club = (
       <Avatar
+        onPress={() => this.props.handleSuitClick('club')}
         containerStyle={styles.cardButton}
         source={require('./icons/club.png')}
         large
@@ -25,6 +27,7 @@ export default class CardSet extends React.Component {
 
     const diamond = (
       <Avatar
+        onPress={() => this.props.handleSuitClick('diamond')}
         containerStyle={styles.cardButton}
         source={require('./icons/diamond.png')}
         large
@@ -34,6 +37,7 @@ export default class CardSet extends React.Component {
 
     const heart = (
       <Avatar
+        onPress={() => this.props.handleSuitClick('heart')}
         containerStyle={styles.cardButton}
         source={require('./icons/heart.png')}
         large
