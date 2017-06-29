@@ -4,6 +4,7 @@ import { Avatar } from 'react-native-elements'
 
 export default class CardSet extends React.Component {
   render() {
+    // define the different avatars
     const spade = (
       <Avatar
         containerStyle={styles.cardButton}
@@ -40,11 +41,12 @@ export default class CardSet extends React.Component {
       />
     )
 
-    const card = null
+    var card = null
     switch (this.props.card) {
       case ('ace'):
         card = (
           <Avatar
+            onPress={() => this.props.handleCardClick('ace')}
             containerStyle={styles.cardButton}
             source={require('./icons/ace.png')}
             large
@@ -56,6 +58,7 @@ export default class CardSet extends React.Component {
       case ('king'):
         card = (
           <Avatar
+            onPress={() => this.props.handleCardClick('king')}
             containerStyle={styles.cardButton}
             source={require('./icons/king.png')}
             large
@@ -67,6 +70,7 @@ export default class CardSet extends React.Component {
       case ('queen'):
         card = (
           <Avatar
+            onPress={() => this.props.handleCardClick('queen')}
             containerStyle={styles.cardButton}
             source={require('./icons/queen.png')}
             large
@@ -78,6 +82,7 @@ export default class CardSet extends React.Component {
       case ('jack'):
         card = (
           <Avatar
+            onPress={() => this.props.handleCardClick('jack')}
             containerStyle={styles.cardButton}
             source={require('./icons/jack.png')}
             large
@@ -89,6 +94,7 @@ export default class CardSet extends React.Component {
       case ('ten'):
         card = (
           <Avatar
+            onPress={() => this.props.handleCardClick('ten')}
             containerStyle={styles.cardButton}
             source={require('./icons/10.png')}
             large
@@ -100,6 +106,7 @@ export default class CardSet extends React.Component {
       case ('nine'):
         card = (
           <Avatar
+            onPress={() => this.props.handleCardClick('nine')}
             containerStyle={styles.cardButton}
             source={require('./icons/9.png')}
             large
@@ -108,12 +115,19 @@ export default class CardSet extends React.Component {
         )
         break
     }
+
+    var showSuits = false
+    if (this.props.card === this.props.cardSelected) {
+      showSuits = true
+    }
+
     return(
       <View style={styles.buttonContainer}>
-        {spade}
-        {club}
-        {diamond}
-        {heart}
+        {showSuits && spade}
+        {showSuits && club}
+        {!showSuits && card}
+        {showSuits && diamond}
+        {showSuits && heart}
       </View>
     )
   }

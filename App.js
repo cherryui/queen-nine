@@ -10,43 +10,50 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      showSuit: false
+      cardSelected: null
     }
   }
+
+  // callback for when a card is clicked
+  // sets that as the current selected card in state
+  handleCardClick = (card) => {
+    this.setState({ cardSelected: card })
+    console.log(this.state)
+  }
+
   render() {
     return (
       <View style={styles.mainContainer}>
         <Text h3 style={{color: 'white'}}>Euchre Call</Text>
-        <CardSet card='king'/>
-        <Avatar
-          containerStyle={styles.cardButton}
-          source={require('./icons/king.png')}
-          large
-          rounded
+        <CardSet 
+          card='ace'
+          handleCardClick={this.handleCardClick}
+          cardSelected={this.state.cardSelected}
         />
-        <Avatar
-          containerStyle={styles.cardButton}
-          source={require('./icons/queen.png')}
-          large
-          rounded
+        <CardSet 
+          card='king'
+          handleCardClick={this.handleCardClick}
+          cardSelected={this.state.cardSelected}
         />
-        <Avatar
-          containerStyle={styles.cardButton}
-          source={require('./icons/jack.png')}
-          large
-          rounded
+        <CardSet 
+          card='queen'
+          handleCardClick={this.handleCardClick}
+          cardSelected={this.state.cardSelected}
         />
-        <Avatar
-          containerStyle={styles.cardButton}
-          source={require('./icons/10.png')}
-          large
-          rounded
+        <CardSet 
+          card='jack'
+          handleCardClick={this.handleCardClick}
+          cardSelected={this.state.cardSelected}
         />
-        <Avatar
-          containerStyle={styles.cardButton}
-          source={require('./icons/9.png')}
-          large
-          rounded
+        <CardSet 
+          card='ten'
+          handleCardClick={this.handleCardClick}
+          cardSelected={this.state.cardSelected}
+        />
+        <CardSet 
+          card='nine'
+          handleCardClick={this.handleCardClick}
+          cardSelected={this.state.cardSelected}
         />
         <View style={styles.buttonContainer}>
           <Button
