@@ -21,7 +21,12 @@ export default class App extends React.Component {
       nine: null,
 
       plusMinus: null,
-      plusMinusSelected: false
+      plusMinusSelected: false,
+
+      trump: null,
+      trumpSelected: false,
+
+      submitted: false
     }
   }
 
@@ -64,20 +69,29 @@ export default class App extends React.Component {
     this.setState({ plusMinus: sign, plusMinusSelected: true })
   }
 
+  // set trump on trump click
+  handleTrumpClick = (trump) => {
+    this.setState({ trumpSelected: true, trump: trump })
+  }
+
+  // send a POST request to server with the hand, trump and plus-minus
   handleSubmitClick = () => {
-    this.setState({ 
-      cardSelected: null,
+    // this.setState({ 
+    //   cardSelected: null,
 
-      ace: null,
-      king: null,
-      queen: null,
-      jack: null,
-      ten: null,
-      nine: null,
+    //   ace: null,
+    //   king: null,
+    //   queen: null,
+    //   jack: null,
+    //   ten: null,
+    //   nine: null,
 
-      plusMinus: null,
-      plusMinusSelected: false
-    })
+    //   plusMinus: null,
+    //   plusMinusSelected: false,
+
+    //   trump: null,
+    //   trumpSelected: false
+    // })
   }
 
   render() {
@@ -127,11 +141,17 @@ export default class App extends React.Component {
           cardSelected={this.state.cardSelected}
           cardSuit={this.state.nine}
         />
-        <ButtonSet 
-          handlePlusMinusClick={this.handlePlusMinusClick}
-          handleSubmitClick={this.handleSubmitClick}
-          plusMinusSelected={this.state.plusMinusSelected}
-        />
+        {this.state.trumpSelected ? 
+          <ButtonSet 
+            handlePlusMinusClick={this.handlePlusMinusClick}
+            handleSubmitClick={this.handleSubmitClick}
+            plusMinusSelected={this.state.plusMinusSelected}
+          /> :
+          <CardSet 
+            card='trump'
+            handleSuitClick={this.handleTrumpClick}
+            cardSelected={'trump'}
+          /> }
       </View>
     )
   }

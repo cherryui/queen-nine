@@ -46,81 +46,59 @@ export default class CardSet extends React.Component {
       />
     )
 
-    var card = null
-    switch (this.props.card) {
-      case ('ace'):
-        card = (
-          <Avatar
-            onPress={() => this.props.handleCardClick('ace')}
-            containerStyle={styles.cardButton}
-            source={require('./icons/ace.png')}
-            large
-            rounded
-          />
-        )
-        break
+    // define other avatar
+    // if it already has a value, show the suit icon
+    // else, show the card icon
+    var cardIcon = null
 
-      case ('king'):
-        card = (
-          <Avatar
-            onPress={() => this.props.handleCardClick('king')}
-            containerStyle={styles.cardButton}
-            source={require('./icons/king.png')}
-            large
-            rounded
-          />
-        )
-        break
-
-      case ('queen'):
-        card = (
-          <Avatar
-            onPress={() => this.props.handleCardClick('queen')}
-            containerStyle={styles.cardButton}
-            source={require('./icons/queen.png')}
-            large
-            rounded
-          />
-        )
-        break
-
-      case ('jack'):
-        card = (
-          <Avatar
-            onPress={() => this.props.handleCardClick('jack')}
-            containerStyle={styles.cardButton}
-            source={require('./icons/jack.png')}
-            large
-            rounded
-          />
-        )
-        break
-
-      case ('ten'):
-        card = (
-          <Avatar
-            onPress={() => this.props.handleCardClick('ten')}
-            containerStyle={styles.cardButton}
-            source={require('./icons/10.png')}
-            large
-            rounded
-          />
-        )
-        break
-
-      case ('nine'):
-        card = (
-          <Avatar
-            onPress={() => this.props.handleCardClick('nine')}
-            containerStyle={styles.cardButton}
-            source={require('./icons/9.png')}
-            large
-            rounded
-          />
-        )
-        break
+    if (this.props.cardSuit) {
+      switch (this.props.cardSuit) {
+        case ('spade'):
+          cardIcon = Icons.spade
+          break
+        case ('club'):
+          cardIcon = Icons.club
+          break
+        case ('diamond'):
+          cardIcon = Icons.diamond
+          break
+        case ('heart'):
+          cardIcon = Icons.heart
+          break
+      }
+    } else {
+      switch (this.props.card) {
+        case ('ace'):
+          cardIcon = Icons.ace
+          break
+        case ('king'):
+          cardIcon = Icons.king
+          break
+        case ('queen'):
+          cardIcon = Icons.queen
+          break
+        case ('jack'):
+          cardIcon = Icons.jack
+          break
+        case ('ten'):
+          cardIcon = Icons.ten
+          break
+        case ('nine'):
+          cardIcon = Icons.nine
+          break
+      }
     }
 
+    card = (
+      <Avatar
+        onPress={() => this.props.handleCardClick(this.props.card)}
+        containerStyle={styles.cardButton}
+        source={cardIcon}
+        large
+        rounded
+      />)
+
+    // check to see if card has been clicked
     var showSuits = false
     if (this.props.card === this.props.cardSelected) {
       showSuits = true
