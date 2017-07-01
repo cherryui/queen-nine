@@ -6,6 +6,8 @@ import { Avatar, Button, Text } from 'react-native-elements'
 import CardSet from './CardSet.js'
 import ButtonSet from './ButtonSet.js'
 
+import Secrets from './secrets.json'
+
 export default class App extends React.Component {
   constructor (props) {
     super(props)
@@ -25,6 +27,8 @@ export default class App extends React.Component {
 
       trump: null,
       trumpSelected: false,
+
+      wonHand: null,
 
       submitted: false
     }
