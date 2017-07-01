@@ -90,36 +90,42 @@ export default class App extends React.Component {
           handleCardClick={this.handleCardClick}
           handleSuitClick={this.handleSuitClick}
           cardSelected={this.state.cardSelected}
+          cardSuit={this.state.ace}
         />
         <CardSet 
           card='king'
           handleCardClick={this.handleCardClick}
           handleSuitClick={this.handleSuitClick}
           cardSelected={this.state.cardSelected}
+          cardSuit={this.state.king}
         />
         <CardSet 
           card='queen'
           handleCardClick={this.handleCardClick}
           handleSuitClick={this.handleSuitClick}
           cardSelected={this.state.cardSelected}
+          cardSuit={this.state.queen}
         />
         <CardSet 
           card='jack'
           handleCardClick={this.handleCardClick}
           handleSuitClick={this.handleSuitClick}
           cardSelected={this.state.cardSelected}
+          cardSuit={this.state.jack}
         />
         <CardSet 
           card='ten'
           handleCardClick={this.handleCardClick}
           handleSuitClick={this.handleSuitClick}
           cardSelected={this.state.cardSelected}
+          cardSuit={this.state.ten}
         />
         <CardSet 
           card='nine'
           handleCardClick={this.handleCardClick}
           handleSuitClick={this.handleSuitClick}
           cardSelected={this.state.cardSelected}
+          cardSuit={this.state.nine}
         />
         <ButtonSet 
           handlePlusMinusClick={this.handlePlusMinusClick}

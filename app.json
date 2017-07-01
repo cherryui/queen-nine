@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Euchre Call",
-    "slug": "euchre_call",
+    "slug": "euchre-call",
     "sdkVersion": "18.0.0",
     "privacy": "public"
   }

@@ -1,15 +1,16 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Avatar } from 'react-native-elements'
+import Icons from './icons/Icons.js'
 
 export default class CardSet extends React.Component {
   render() {
-    // define the different avatars
+    // define the suit avatars
     const spade = (
       <Avatar
         onPress={() => this.props.handleSuitClick('spade')}
         containerStyle={styles.cardButton}
-        source={require('./icons/spade.png')}
+        source={Icons.spade}
         large
         rounded
       />
@@ -19,7 +20,7 @@ export default class CardSet extends React.Component {
       <Avatar
         onPress={() => this.props.handleSuitClick('club')}
         containerStyle={styles.cardButton}
-        source={require('./icons/club.png')}
+        source={Icons.club}
         large
         rounded
       />
@@ -29,7 +30,7 @@ export default class CardSet extends React.Component {
       <Avatar
         onPress={() => this.props.handleSuitClick('diamond')}
         containerStyle={styles.cardButton}
-        source={require('./icons/diamond.png')}
+        source={Icons.diamond}
         large
         rounded
       />
@@ -39,7 +40,7 @@ export default class CardSet extends React.Component {
       <Avatar
         onPress={() => this.props.handleSuitClick('heart')}
         containerStyle={styles.cardButton}
-        source={require('./icons/heart.png')}
+        source={Icons.heart}
         large
         rounded
       />
