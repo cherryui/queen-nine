@@ -49,8 +49,12 @@ export default class Main extends React.Component {
     this.setState({ trumpSelected: true, trump: trump })
   }
 
+  // send state to parent
+  handleMainSubmitClick = () => {
+    this.props.handleSubmitClick(this.state)
+  }
+
   render() {
-    console.log(this.state)
     return (
       <View style={styles.mainContainer}>
         <Text h3 style={{color: 'white'}}>Euchre Call</Text>
@@ -100,7 +104,7 @@ export default class Main extends React.Component {
         {this.state.trumpSelected ? 
           <ButtonSet 
             handlePlusMinusClick={this.handlePlusMinusClick}
-            handleSubmitClick={this.props.handleSubmitClick}
+            handleSubmitClick={this.handleMainSubmitClick}
             plusMinusSelected={this.state.plusMinusSelected}
           /> :
           <SuitSet 
