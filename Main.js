@@ -55,6 +55,7 @@ export default class Main extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <View style={styles.mainContainer}>
         <Text h3 style={{color: 'white'}}>Euchre Call</Text>
