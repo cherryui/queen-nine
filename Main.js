@@ -26,7 +26,7 @@ export default class Main extends React.Component {
       plusMinusSelected: false,
 
       trump: null,
-      trumpSelected: false,
+      trumpSelected: false
     }
   }
 
@@ -52,10 +52,24 @@ export default class Main extends React.Component {
   // send state to parent
   handleMainSubmitClick = () => {
     this.props.handleSubmitClick(this.state)
+    this.setState( {
+      right: false,
+      left: false,
+      ace: false,
+      king: false,
+      queen: false,
+      ten: false,
+      nine: false,
+
+      plusMinus: null,
+      plusMinusSelected: false,
+
+      trump: null,
+      trumpSelected: false
+    })
   }
 
   render() {
-    console.log(this.state)
     return (
       <View style={styles.mainContainer}>
         <Text h3 style={{color: 'white'}}>Euchre Call</Text>

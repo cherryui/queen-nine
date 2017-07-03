@@ -20,10 +20,11 @@ export default class App extends React.Component {
 
   // set won in state, send request and reset everything
   handleWinLossClick = (won) => {
+    console.log(won)
     this.setState({ won: won })
 
     // send request
-    fetch('http://localhost:8000/api/calls', {
+    fetch('https://1c35701c.ngrok.io/api/calls', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,11 +41,17 @@ export default class App extends React.Component {
         },
         trump: this.state.lowerState.trump,
         plusMinus: this.state.lowerState.plusMinus,
-        wonHand: this.state.won
+        wonHand: won
       })
     })
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error))
+      .then((response) => 
+        {
+          if (response.ok) {
+            this.setState({ submitted: false, won: null, lowerState: null })
+          }
+        }
+      )
+      .catch((error) => console.log(error))
   }
 
   render () {
