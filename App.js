@@ -24,7 +24,7 @@ export default class App extends React.Component {
     this.setState({ won: won })
 
     // send request
-    fetch('https://1c35701c.ngrok.io/api/calls', {
+    fetch('https://euchre-call.herokuapp.com/api/calls', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
