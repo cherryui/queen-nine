@@ -61,6 +61,7 @@ export default class App extends React.Component {
         wonHand: won
       })
     })
+      // set state accordingly, updating fetching to show you got data back
       .then((response) => 
         {
           if (response.ok) {
