@@ -13,6 +13,7 @@ export default class WonLost extends React.Component {
           borderRadius={20}
           backgroundColor={'orange'}
           containerViewStyle={styles.button}
+          disabled={this.props.fetching}
         />
         <Button
           onPress={() => this.props.handleWinLossClick(false)}
@@ -20,6 +21,7 @@ export default class WonLost extends React.Component {
           borderRadius={20}
           backgroundColor={'orange'}
           containerViewStyle={styles.button}
+          disabled={this.props.fetching}
         />
       </View>
     )

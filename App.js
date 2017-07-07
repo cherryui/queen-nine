@@ -38,7 +38,7 @@ export default class App extends React.Component {
 
   // set won in state, send request and reset everything
   handleWinLossClick = (won) => {
-    this.setState({ won: won })
+    this.setState({ won: won, fetching: true })
 
     // send request
     fetch('https://euchre-call.herokuapp.com/api/calls', {
@@ -64,7 +64,9 @@ export default class App extends React.Component {
       .then((response) => 
         {
           if (response.ok) {
-            this.setState({ submitted: false, won: null, lowerState: null })
+            this.setState({ submitted: false, won: null, lowerState: null, fetching: false })
+          } else {
+            this.setState({ fetching: false })
           }
         }
       )
@@ -82,6 +84,7 @@ export default class App extends React.Component {
     if (this.state.submitted) {
       content = <WonLost
         handleWinLossClick={this.handleWinLossClick}
+        fetching={this.state.fetching}
       />
     } else {
       content = (
