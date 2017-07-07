@@ -11,6 +11,17 @@ export default class SignInDrawer extends React.Component {
       password: null
     }
   }
+
+  // updates state with username
+  handleChangeUsername = (text) => {
+    this.setState({ username: text })
+  }
+
+  // updates state with password
+  handleChangePassword = (text) => {
+    this.setState({ password: text })
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -19,21 +30,22 @@ export default class SignInDrawer extends React.Component {
         <FormInput
           ref='username'
           value={this.state.username}
-          onChangeText={this.handleUsernameChange} 
+          onChangeText={this.handleChangeUsername} 
         />
         <FormLabel>Password</FormLabel>
         <FormInput
           ref='password'
           value={this.state.password}
-          onChangeText={this.handlePasswordChange} 
+          onChangeText={this.handleChangePassword} 
           secureTextEntry
         />
         <Button
-          onPress={() => this.props.handleWinLossClick(false)}
+          onPress={() => this.props.logInUser(this.state.username, this.state.password)}
           title='log in'
           borderRadius={20}
           backgroundColor={'orange'}
           containerViewStyle={styles.button}
+          disabled={this.props.fetching}
         />
       </View>
     )

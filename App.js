@@ -15,10 +15,13 @@ export default class App extends React.Component {
       won: null,
       lowerState: null,
 
+      fetching: false,
+
       drawerOpen: false,
       username: null
     }
   }
+
   // set state to switch to win/loss component
   handleSubmitClick = (state) => {
     this.setState({ submitted: true, lowerState: state })
@@ -68,6 +71,12 @@ export default class App extends React.Component {
       .catch((error) => console.log(error))
   }
 
+  // set state to fetching, then send requst to log in the user
+  // once user is logged in, set session token, then use that for other requests
+  logInUser = (username, password) => {
+    this.setState({ fetching: true })
+  }
+
   render () {
     var content = null
     if (this.state.submitted) {
@@ -78,7 +87,7 @@ export default class App extends React.Component {
       content = (
         <Drawer
           open={this.state.drawerOpen}
-          content={<SignInDrawer username={this.state.username} />}
+          content={<SignInDrawer username={this.state.username} fetching={this.state.fetching} logInUser={this.logInUser}/>}
           tapToClose={true}
           openDrawerOffset={100}
           side='right'
