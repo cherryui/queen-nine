@@ -41,7 +41,7 @@ export default class App extends React.Component {
     this.setState({ won: won, fetching: true })
 
     // send request
-    fetch('https://euchre-call.herokuapp.com/api/calls', {
+    fetch('https://queen-nine.herokuapp.com/api/calls', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
