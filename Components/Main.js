@@ -50,10 +50,14 @@ export default class Main extends React.Component {
     this.setState({ trumpSelected: true, trump: trump })
   }
 
-  // send state to parent
+  // send state to parent, unless user isn't logged in
   handleMainSubmitClick = () => {
-    this.props.handleSubmitClick(this.state)
-    this.clearState()
+    if (this.props.username) {
+      this.props.handleSubmitClick(this.state)
+      this.clearState()
+    } else {
+      this.props.handleUserClick()
+    }
   }
 
   // wipes the state of this component clean

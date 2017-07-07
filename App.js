@@ -20,6 +20,8 @@ export default class App extends React.Component {
       drawerOpen: false,
       username: null
     }
+
+    this.baseURL = 'https://2b100c49.ngrok.io/api/'
   }
 
   // set state to switch to win/loss component
@@ -40,8 +42,9 @@ export default class App extends React.Component {
   handleWinLossClick = (won) => {
     this.setState({ won: won, fetching: true })
 
+    const url = this.baseURL + 'calls'
     // send request
-    fetch('https://queen-nine.herokuapp.com/api/calls', {
+    fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -71,13 +74,56 @@ export default class App extends React.Component {
           }
         }
       )
-      .catch((error) => console.log(error))
+      .catch((error) => console.log("ERROR", error))
   }
 
   // set state to fetching, then send requst to log in the user
   // once user is logged in, set session token, then use that for other requests
   logInUser = (username, password) => {
     this.setState({ fetching: true })
+
+    const url = this.baseURL + 'login'
+
+    // send request
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    })
+      // set state accordingly, updating fetching to show you got data back
+      .then((response) => 
+        {
+          if (response.ok) {
+            this.setState({ username: username, fetching: false })
+          } else {
+            this.setState({ fetching: false })
+          }
+        }
+      )
+      .catch((error) => console.log("ERROR", error))
+  }
+
+  // set state to fetching, then send GET to log user out
+  logOutUser = () => {
+    this.setState({ fetching: true })
+
+    const url = this.baseURL + 'logout'
+
+    // send request
+    fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          this.setState({ username: null, fetching: false })
+        } else {
+          this.setState({ fetching: false })
+        }
+      })
+      .catch((error) => console.log("ERROR", error))
   }
 
   render () {
@@ -91,7 +137,12 @@ export default class App extends React.Component {
       content = (
         <Drawer
           open={this.state.drawerOpen}
-          content={<SignInDrawer username={this.state.username} fetching={this.state.fetching} logInUser={this.logInUser}/>}
+          content={<SignInDrawer 
+            username={this.state.username} 
+            fetching={this.state.fetching} 
+            logInUser={this.logInUser}
+            logOutUser={this.logOutUser}
+          />}
           tapToClose={true}
           openDrawerOffset={100}
           side='right'
@@ -101,6 +152,7 @@ export default class App extends React.Component {
           <Main 
             handleSubmitClick={this.handleSubmitClick}
             handleUserClick={this.handleUserClick}
+            username={this.state.username}
           />
         </Drawer>
       ) 

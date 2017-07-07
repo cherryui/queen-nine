@@ -23,30 +23,54 @@ export default class SignInDrawer extends React.Component {
   }
 
   render () {
+    // define content
+    var content = null
+    if (this.props.username) {
+      content = (
+        <View>
+          <Text h3 style={styles.header}>{this.props.username}</Text>
+          <Button
+            onPress={() => this.props.logOutUser()}
+            title='log out'
+            borderRadius={20}
+            backgroundColor={'orange'}
+            containerViewStyle={styles.button}
+            disabled={this.props.fetching}
+          />
+        </View>
+      )
+    } else {
+      content = (
+        <View>
+          <Text h3 style={styles.header}>Sign In:</Text>
+          <FormLabel>Username</FormLabel>
+          <FormInput
+            ref='username'
+            value={this.state.username}
+            onChangeText={this.handleChangeUsername} 
+          />
+          <FormLabel>Password</FormLabel>
+          <FormInput
+            ref='password'
+            value={this.state.password}
+            onChangeText={this.handleChangePassword} 
+            secureTextEntry
+          />
+          <Button
+            onPress={() => this.props.logInUser(this.state.username, this.state.password)}
+            title='log in'
+            borderRadius={20}
+            backgroundColor={'orange'}
+            containerViewStyle={styles.button}
+            disabled={this.props.fetching}
+          />
+        </View>
+      )
+    }
+
     return (
       <View style={styles.container}>
-        <Text h3 style={styles.header}>Sign In:</Text>
-        <FormLabel>Username</FormLabel>
-        <FormInput
-          ref='username'
-          value={this.state.username}
-          onChangeText={this.handleChangeUsername} 
-        />
-        <FormLabel>Password</FormLabel>
-        <FormInput
-          ref='password'
-          value={this.state.password}
-          onChangeText={this.handleChangePassword} 
-          secureTextEntry
-        />
-        <Button
-          onPress={() => this.props.logInUser(this.state.username, this.state.password)}
-          title='log in'
-          borderRadius={20}
-          backgroundColor={'orange'}
-          containerViewStyle={styles.button}
-          disabled={this.props.fetching}
-        />
+        {content}
       </View>
     )
   }
