@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
-import Main from './Main.js'
-import WonLost from './WonLost'
+import Main from './Components/Main.js'
+import WonLost from './Components/WonLost'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -33,7 +33,7 @@ export default class App extends React.Component {
         hand: {
           right: this.state.lowerState.right,
           left: this.state.lowerState.left,
-          ace: this.state.lowerState.left,
+          ace: this.state.lowerState.ace,
           king: this.state.lowerState.king,
           queen: this.state.lowerState.queen,
           ten: this.state.lowerState.ten,

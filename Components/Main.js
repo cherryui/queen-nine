@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, TouchableHighlight } from 'react-native'
 
 import { Avatar, Button, Text } from 'react-native-elements'
 
@@ -7,7 +7,7 @@ import SuitSet from './SuitSet.js'
 import ButtonSet from './ButtonSet.js'
 import Card from './Card.js'
 
-import Secrets from './secrets.json'
+import Secrets from '../secrets.json'
 
 export default class Main extends React.Component {
   constructor (props) {
@@ -52,7 +52,12 @@ export default class Main extends React.Component {
   // send state to parent
   handleMainSubmitClick = () => {
     this.props.handleSubmitClick(this.state)
-    this.setState( {
+    this.clearState()
+  }
+
+  // wipes the state of this component clean
+  clearState = () => {
+    this.setState({
       right: false,
       left: false,
       ace: false,
@@ -72,7 +77,9 @@ export default class Main extends React.Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text h3 style={{color: 'white'}}>Euchre Call</Text>
+        <TouchableOpacity onPress={() => this.clearState()}>
+          <Text h3 style={{color: 'white'}}>Queen Nine</Text>
+        </TouchableOpacity>
         <View style={styles.cardRow}>
           <Card
             card={'right'}

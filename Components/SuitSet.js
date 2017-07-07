@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Avatar } from 'react-native-elements'
-import Icons from './icons/Icons.js'
+import Icons from '../icons/Icons.js'
 
 export default class SuitSet extends React.Component {
   render() {
