@@ -21,7 +21,7 @@ export default class App extends React.Component {
       username: null
     }
 
-    this.baseURL = 'https://2b100c49.ngrok.io/api/'
+    this.baseURL = 'https://queen-nine.herokuapp.com/api/'
   }
 
   // set state to switch to win/loss component
