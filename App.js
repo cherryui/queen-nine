@@ -2,6 +2,9 @@ import React from 'react'
 import { View } from 'react-native'
 import Main from './Components/Main.js'
 import WonLost from './Components/WonLost'
+import SignInDrawer from './Components/SignInDrawer'
+
+import Drawer from 'react-native-drawer'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -11,6 +14,9 @@ export default class App extends React.Component {
       submitted: false,
       won: null,
       lowerState: null,
+
+      drawerOpen: false,
+      username: null
     }
   }
   // set state to switch to win/loss component
@@ -18,9 +24,17 @@ export default class App extends React.Component {
     this.setState({ submitted: true, lowerState: state })
   }
 
+  // handle click on user happy face to open drawer
+  handleUserClick = () => {
+    if (this.state.drawerOpen) {
+      this.setState({ drawerOpen: false })
+    } else {
+      this.setState({ drawerOpen: true })
+    }
+  }
+
   // set won in state, send request and reset everything
   handleWinLossClick = (won) => {
-    console.log(won)
     this.setState({ won: won })
 
     // send request
@@ -55,17 +69,28 @@ export default class App extends React.Component {
   }
 
   render () {
-    console.log(this.state)
-
     var content = null
     if (this.state.submitted) {
       content = <WonLost
         handleWinLossClick={this.handleWinLossClick}
       />
     } else {
-      content = <Main 
-        handleSubmitClick={this.handleSubmitClick}
-      /> 
+      content = (
+        <Drawer
+          open={this.state.drawerOpen}
+          content={<SignInDrawer username={this.state.username} />}
+          tapToClose={true}
+          openDrawerOffset={100}
+          side='right'
+          onClose={this.handleUserClick}
+          tweenHandler={Drawer.tweenPresets.parallax}
+        >
+          <Main 
+            handleSubmitClick={this.handleSubmitClick}
+            handleUserClick={this.handleUserClick}
+          />
+        </Drawer>
+      ) 
     }
     return (
       <View style={{flex: 1}}>

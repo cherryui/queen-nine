@@ -1,11 +1,12 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity, TouchableHighlight } from 'react-native'
 
-import { Avatar, Button, Text } from 'react-native-elements'
+import { Avatar, Button, Text, Icon } from 'react-native-elements'
 
 import SuitSet from './SuitSet.js'
 import ButtonSet from './ButtonSet.js'
 import Card from './Card.js'
+import WonLost from './WonLost'
 
 import Secrets from '../secrets.json'
 
@@ -80,6 +81,13 @@ export default class Main extends React.Component {
         <TouchableOpacity onPress={() => this.clearState()}>
           <Text h3 style={{color: 'white'}}>Queen Nine</Text>
         </TouchableOpacity>
+        <Icon
+          name='mood'
+          color='white'
+          size={40}
+          style={styles.happyUserIcon}
+          onPress={() => this.props.handleUserClick()}
+        />
         <View style={styles.cardRow}>
           <Card
             card={'right'}
@@ -148,5 +156,11 @@ const styles = StyleSheet.create({
   cardRow: {
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+
+  happyUserIcon: {
+    position: 'absolute', 
+    right: 15, 
+    top: 25
   }
 })
