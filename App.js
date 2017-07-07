@@ -59,6 +59,7 @@ export default class App extends React.Component {
           ten: this.state.lowerState.ten,
           nine: this.state.lowerState.nine
         },
+        user: this.state.username,
         trump: this.state.lowerState.trump,
         plusMinus: this.state.lowerState.plusMinus,
         wonHand: won
