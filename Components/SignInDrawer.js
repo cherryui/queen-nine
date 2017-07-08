@@ -64,6 +64,9 @@ export default class SignInDrawer extends React.Component {
             containerViewStyle={styles.button}
             disabled={this.props.fetching}
           />
+          {this.props.fetching && <Text style={styles.fetchingText}>
+            Logging in! If no one has used the app in a while, this may take a moment as the server is woken from a deep slumber
+          </Text>}
         </View>
       )
     }
@@ -90,5 +93,12 @@ const styles = StyleSheet.create({
 
   button: {
     marginTop: 30
+  },
+
+  fetchingText: {
+    color: 'orange',
+    textAlign: 'center',
+    margin: 8,
+    marginTop: 15
   }
 })
