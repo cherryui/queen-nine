@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import Main from './Components/Main.js'
 import WonLost from './Components/WonLost'
 import SignInDrawer from './Components/SignInDrawer'
+import CreateAccountDrawer from './Components/CreateAccountDrawer'
 
 import Drawer from 'react-native-drawer'
 
@@ -16,8 +17,10 @@ export default class App extends React.Component {
       lowerState: null,
 
       fetching: false,
+      errors: null,
 
-      drawerOpen: false,
+      rightDrawerOpen: false,
+      leftDrawerOpen: false,
       username: null
     }
 
@@ -29,12 +32,21 @@ export default class App extends React.Component {
     this.setState({ submitted: true, lowerState: state })
   }
 
-  // handle click on user happy face to open drawer
-  handleUserClick = () => {
-    if (this.state.drawerOpen) {
-      this.setState({ drawerOpen: false })
+  // handle click on user happy face to open login drawer
+  handleRightUserClick = () => {
+    if (this.state.rightDrawerOpen) {
+      this.setState({ rightDrawerOpen: false })
     } else {
-      this.setState({ drawerOpen: true })
+      this.setState({ rightDrawerOpen: true })
+    }
+  }
+
+  // handle click on user create account icon to open create account drawer
+  handleLeftUserClick = () => {
+    if (this.state.leftDrawerOpen) {
+      this.setState({ leftDrawerOpen: false })
+    } else {
+      this.setState({ leftDrawerOpen: true })
     }
   }
 
@@ -109,6 +121,48 @@ export default class App extends React.Component {
       .catch((error) => console.log("ERROR", error))
   }
 
+  // set state to fetching, then send requst to create the user
+  // if good, kick off request to login
+  // if not, set errors
+  createAccount = (username, password, secret) => {
+    this.setState({ fetching: true })
+
+    // filter out bad usernames and passwords
+    if (username === null || username === '' || password === null || password === '') {
+      this.setState({ fetching: false, errors: "Username and password must both exist!" })
+      return
+    }
+
+    const url = this.baseURL + 'users/create'
+
+    // send request
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        secret: secret
+      })
+    })
+      // set state accordingly, updating fetching to show you got data back
+      .then((response) => 
+        {
+          if (response.ok) {
+            this.setState({ fetching: false })
+            this.logInUser(username, password)
+          } else if (response.status === 401) {
+            this.setState({ fetching: false, errors: "Wrong secret code, try again!" })
+          } else {
+            this.setState({ fetching: false, errors: "An unknown error occurred." })
+          }
+        }
+      )
+      .catch((error) => console.log("ERROR", error))
+  }
+
   // set state to fetching, then send GET to log user out
   logOutUser = () => {
     this.setState({ fetching: true })
@@ -128,6 +182,7 @@ export default class App extends React.Component {
   }
 
   render () {
+    console.log(this.state)
     var content = null
     if (this.state.submitted) {
       content = <WonLost
@@ -137,24 +192,39 @@ export default class App extends React.Component {
     } else {
       content = (
         <Drawer
-          open={this.state.drawerOpen}
-          content={<SignInDrawer 
-            username={this.state.username} 
-            fetching={this.state.fetching} 
-            logInUser={this.logInUser}
-            logOutUser={this.logOutUser}
+          open={this.state.leftDrawerOpen}
+          content={<CreateAccountDrawer
+            createAccount={this.createAccount}
+            fetching={this.state.fetching}
+            errors={this.state.errors}
+            username={this.state.username}
           />}
           tapToClose={true}
           openDrawerOffset={100}
-          side='right'
-          onClose={this.handleUserClick}
+          onClose={this.handleLeftUserClick}
           tweenHandler={Drawer.tweenPresets.parallax}
         >
-          <Main 
-            handleSubmitClick={this.handleSubmitClick}
-            handleUserClick={this.handleUserClick}
-            username={this.state.username}
-          />
+          <Drawer
+            open={this.state.rightDrawerOpen}
+            content={<SignInDrawer 
+              username={this.state.username} 
+              fetching={this.state.fetching}
+              logInUser={this.logInUser}
+              logOutUser={this.logOutUser}
+            />}
+            tapToClose={true}
+            openDrawerOffset={100}
+            side='right'
+            onClose={this.handleRightUserClick}
+            tweenHandler={Drawer.tweenPresets.parallax}
+          >
+            <Main 
+              handleSubmitClick={this.handleSubmitClick}
+              handleRightUserClick={this.handleRightUserClick}
+              handleLeftUserClick={this.handleLeftUserClick}
+              username={this.state.username}
+            />
+          </Drawer>
         </Drawer>
       ) 
     }

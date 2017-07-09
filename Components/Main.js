@@ -82,6 +82,14 @@ export default class Main extends React.Component {
   render() {
     return (
       <View style={styles.mainContainer}>
+        <Icon
+          name='group-add'
+          color='white'
+          visible={!this.props.username}
+          size={40}
+          style={styles.leftUserIcon}
+          onPress={() => this.props.handleLeftUserClick()}
+        />
         <TouchableOpacity onPress={() => this.clearState()}>
           <Text h3 style={{color: 'white'}}>Queen Nine</Text>
         </TouchableOpacity>
@@ -89,8 +97,8 @@ export default class Main extends React.Component {
           name='mood'
           color='white'
           size={40}
-          style={styles.happyUserIcon}
-          onPress={() => this.props.handleUserClick()}
+          style={styles.rightUserIcon}
+          onPress={() => this.props.handleRightUserClick()}
         />
         <View style={styles.cardRow}>
           <Card
@@ -162,9 +170,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
 
-  happyUserIcon: {
+  rightUserIcon: {
     position: 'absolute', 
     right: 15, 
-    top: 25
+    top: 23
+  },
+
+  leftUserIcon: {
+    position: 'absolute', 
+    left: 15, 
+    top: 23
   }
 })

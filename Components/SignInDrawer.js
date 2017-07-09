@@ -65,7 +65,7 @@ export default class SignInDrawer extends React.Component {
             disabled={this.props.fetching}
           />
           {this.props.fetching && <Text style={styles.fetchingText}>
-            Logging in! If no one has used the app in a while, this may take a moment as the server is woken from a deep slumber
+            Logging in! If no one has used the app in a while, this may take a moment as the server is woken from a deep slumber.
           </Text>}
         </View>
       )
