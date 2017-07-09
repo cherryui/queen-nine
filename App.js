@@ -83,7 +83,7 @@ export default class App extends React.Component {
   logInUser = (username, password) => {
     this.setState({ fetching: true })
 
-    const url = this.baseURL + 'login'
+    const url = this.baseURL + 'users/login'
 
     // send request
     fetch(url, {
@@ -113,7 +113,7 @@ export default class App extends React.Component {
   logOutUser = () => {
     this.setState({ fetching: true })
 
-    const url = this.baseURL + 'logout'
+    const url = this.baseURL + 'users/logout'
 
     // send request
     fetch(url)
