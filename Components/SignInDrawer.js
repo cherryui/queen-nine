@@ -47,7 +47,9 @@ export default class SignInDrawer extends React.Component {
           <FormInput
             ref='username'
             value={this.state.username}
-            onChangeText={this.handleChangeUsername} 
+            onChangeText={this.handleChangeUsername}
+            autoCorrect={false}
+
           />
           <FormLabel>Password</FormLabel>
           <FormInput
@@ -55,6 +57,7 @@ export default class SignInDrawer extends React.Component {
             value={this.state.password}
             onChangeText={this.handleChangePassword} 
             secureTextEntry
+            autoCorrect={false}
           />
           <Button
             onPress={() => this.props.logInUser(this.state.username, this.state.password)}
@@ -64,9 +67,9 @@ export default class SignInDrawer extends React.Component {
             containerViewStyle={styles.button}
             disabled={this.props.fetching}
           />
-          {this.props.fetching && <Text style={styles.fetchingText}>
+          {this.props.fetching ? <Text style={styles.fetchingText}>
             Logging in! If no one has used the app in a while, this may take a moment as the server is woken from a deep slumber.
-          </Text>}
+          </Text> : <Text style={styles.fetchingText}>{this.props.errors}</Text> }
         </View>
       )
     }

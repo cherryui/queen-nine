@@ -38,7 +38,8 @@ export default class SignInDrawer extends React.Component {
         <FormInput
           ref='username'
           value={this.state.username}
-          onChangeText={this.handleChangeUsername} 
+          onChangeText={this.handleChangeUsername}
+          autoCorrect={false}
         />
         <FormLabel>Password</FormLabel>
         <FormInput
@@ -46,6 +47,7 @@ export default class SignInDrawer extends React.Component {
           value={this.state.password}
           onChangeText={this.handleChangePassword} 
           secureTextEntry
+          autoCorrect={false}
         />
         <FormLabel>Secret Code to Create Account</FormLabel>
         <FormInput
@@ -53,6 +55,7 @@ export default class SignInDrawer extends React.Component {
           value={this.state.secret}
           onChangeText={this.handleChangeSecret} 
           secureTextEntry
+          autoCorrect={false}
         />
         <Button
           onPress={() => this.props.createAccount(this.state.username, this.state.password, this.state.secret)}

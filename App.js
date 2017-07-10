@@ -24,7 +24,7 @@ export default class App extends React.Component {
       username: null
     }
 
-    this.baseURL = 'https://queen-nine.herokuapp.com/api/'
+    this.baseURL = 'https://9350f080.ngrok.io/api/'
   }
 
   // set state to switch to win/loss component
@@ -108,16 +108,19 @@ export default class App extends React.Component {
         password: password
       })
     })
-      // set state accordingly, updating fetching to show you got data back
-      .then((response) => 
-        {
-          if (response.ok) {
-            this.setState({ username: username, fetching: false })
-          } else {
-            this.setState({ fetching: false })
-          }
+      // set state based on if response is ok
+      .then((response) => {
+        this.setState({ fetching: false })
+        if (response.ok) {
+          this.setState({ username: username, errors: null })
+        } else {
+          return response.json()
         }
-      )
+      })
+      // add errors if response is not ok
+      .then((responseJSON) => {
+        this.setState({ errors: responseJSON.errors })
+      })
       .catch((error) => console.log("ERROR", error))
   }
 
@@ -148,18 +151,32 @@ export default class App extends React.Component {
       })
     })
       // set state accordingly, updating fetching to show you got data back
-      .then((response) => 
-        {
-          if (response.ok) {
-            this.setState({ fetching: false })
-            this.logInUser(username, password)
-          } else if (response.status === 401) {
-            this.setState({ fetching: false, errors: "Wrong secret code, try again!" })
-          } else {
-            this.setState({ fetching: false, errors: "An unknown error occurred." })
-          }
+      // .then((response) => 
+      //   {
+      //     if (response.ok) {
+      //       this.setState({ fetching: false })
+      //       this.logInUser(username, password)
+      //     } else if (response.status === 401) {
+      //       this.setState({ fetching: false, errors: "Wrong secret code, try again!" })
+      //     } else {
+      //       this.setState({ fetching: false, errors: "An unknown error occurred." })
+      //     }
+      //   }
+      // )
+      // set state based on if response is ok
+      .then((response) => {
+        this.setState({ fetching: false })
+        if (response.ok) {
+          this.setState({ errors: null })
+          this.logInUser(username, password)
+        } else {
+          return response.json()
         }
-      )
+      })
+      // add errors if response is not ok
+      .then((responseJSON) => {
+        this.setState({ errors: responseJSON.errors })
+      })
       .catch((error) => console.log("ERROR", error))
   }
 
@@ -209,6 +226,7 @@ export default class App extends React.Component {
             content={<SignInDrawer 
               username={this.state.username} 
               fetching={this.state.fetching}
+              errors={this.state.errors}
               logInUser={this.logInUser}
               logOutUser={this.logOutUser}
             />}
