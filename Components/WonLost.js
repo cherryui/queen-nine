@@ -23,6 +23,7 @@ export default class WonLost extends React.Component {
           containerViewStyle={styles.button}
           disabled={this.props.fetching}
         />
+        <Text h4 style={{color: 'orange'}}>{this.props.errors}</Text>
       </View>
     )
   }

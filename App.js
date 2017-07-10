@@ -24,7 +24,8 @@ export default class App extends React.Component {
       username: null
     }
 
-    this.baseURL = 'https://queen-nine.herokuapp.com/api/'
+    // this.baseURL = 'https://queen-nine.herokuapp.com/api/'
+    this.baseURL = 'https://9350f080.ngrok.io/api/'
   }
 
   // set state to switch to win/loss component
@@ -80,13 +81,17 @@ export default class App extends React.Component {
       // set state accordingly, updating fetching to show you got data back
       .then((response) => 
         {
+          this.setState({ fetching: false })
           if (response.ok) {
-            this.setState({ submitted: false, won: null, lowerState: null, fetching: false })
+            this.setState({ submitted: false, won: null, lowerState: null })
           } else {
-            this.setState({ fetching: false })
+            return response.json()
           }
         }
       )
+      .then((responseJSON) => {
+        this.setState({ errors: responseJSON.errors })
+      })
       .catch((error) => console.log("ERROR", error))
   }
 
@@ -150,19 +155,6 @@ export default class App extends React.Component {
         secret: secret
       })
     })
-      // set state accordingly, updating fetching to show you got data back
-      // .then((response) => 
-      //   {
-      //     if (response.ok) {
-      //       this.setState({ fetching: false })
-      //       this.logInUser(username, password)
-      //     } else if (response.status === 401) {
-      //       this.setState({ fetching: false, errors: "Wrong secret code, try again!" })
-      //     } else {
-      //       this.setState({ fetching: false, errors: "An unknown error occurred." })
-      //     }
-      //   }
-      // )
       // set state based on if response is ok
       .then((response) => {
         this.setState({ fetching: false })
@@ -199,12 +191,12 @@ export default class App extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     var content = null
     if (this.state.submitted) {
       content = <WonLost
         handleWinLossClick={this.handleWinLossClick}
         fetching={this.state.fetching}
+        errors={this.state.errors}
       />
     } else {
       content = (
