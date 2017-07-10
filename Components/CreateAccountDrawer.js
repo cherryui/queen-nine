@@ -40,6 +40,7 @@ export default class SignInDrawer extends React.Component {
           value={this.state.username}
           onChangeText={this.handleChangeUsername}
           autoCorrect={false}
+          autoCapitalize='none'
         />
         <FormLabel>Password</FormLabel>
         <FormInput
