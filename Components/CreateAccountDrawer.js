@@ -33,7 +33,7 @@ export default class SignInDrawer extends React.Component {
     return (
       <View style={styles.container}>
         <Text h3 style={styles.header}>Create Account</Text>
-        {this.props.username && <Text style={styles.fetchingText}>Signed in as: {this.state.username}</Text>}
+        {this.props.username && <Text style={styles.fetchingText}>Signed in as: {this.props.username}</Text>}
         <FormLabel>Username</FormLabel>
         <FormInput
           ref='username'
