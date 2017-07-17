@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Keyboard } from 'react-native'
 import Main from './Components/Main.js'
 import WonLost from './Components/WonLost'
 import SignInDrawer from './Components/SignInDrawer'
@@ -37,6 +37,7 @@ export default class App extends React.Component {
   handleRightUserClick = () => {
     if (this.state.rightDrawerOpen) {
       this.setState({ rightDrawerOpen: false })
+      Keyboard.dismiss()
     } else {
       this.setState({ rightDrawerOpen: true })
     }
@@ -46,6 +47,7 @@ export default class App extends React.Component {
   handleLeftUserClick = () => {
     if (this.state.leftDrawerOpen) {
       this.setState({ leftDrawerOpen: false })
+      Keyboard.dismiss()
     } else {
       this.setState({ leftDrawerOpen: true })
     }
