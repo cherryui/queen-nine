@@ -56,7 +56,7 @@ export default class Main extends React.Component {
       this.props.handleSubmitClick(this.state)
       this.clearState()
     } else {
-      this.props.handleUserClick()
+      this.props.handleRightUserClick()
     }
   }
 
