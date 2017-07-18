@@ -25,7 +25,7 @@ export default class App extends React.Component {
     }
 
     this.baseURL = 'https://queen-nine.herokuapp.com/api/'
-    // this.baseURL = 'https://9350f080.ngrok.io/api/'
+    // this.baseURL = 'https://e6deb6b3.ngrok.io/api/'
   }
 
   // set state to switch to win/loss component
@@ -161,8 +161,7 @@ export default class App extends React.Component {
       .then((response) => {
         this.setState({ fetching: false })
         if (response.ok) {
-          this.setState({ errors: null })
-          this.logInUser(username, password)
+          this.setState({ errors: null, username: username })
         } else {
           return response.json()
         }
