@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer'
 
 test('renders correctly', () => {
   const component = renderer.create(
-    <Card card='ace'/>
+    <Card card='ace' />
   ).toJSON()
   expect(component).toMatchSnapshot()
 })

@@ -4,7 +4,7 @@ import { Avatar } from 'react-native-elements'
 import Icons from '../icons/Icons.js'
 
 export default class SuitSet extends React.Component {
-  render() {
+  render () {
     // define the suit avatars
     const spade = (
       <Avatar
@@ -46,7 +46,7 @@ export default class SuitSet extends React.Component {
       />
     )
 
-    return(
+    return (
       <View style={styles.buttonContainer}>
         {spade}
         {club}

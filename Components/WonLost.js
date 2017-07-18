@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import { Button, Text } from 'react-native-elements'
 
 export default class WonLost extends React.Component {
-  render() {
+  render () {
     return (
       <View style={styles.mainContainer}>
         <Text h3 style={{color: 'white'}}>Did you win or lose?</Text>
