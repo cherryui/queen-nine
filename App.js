@@ -25,7 +25,7 @@ export default class App extends React.Component {
     }
 
     this.baseURL = 'https://queen-nine.herokuapp.com/api/'
-    // this.baseURL = 'https://e6deb6b3.ngrok.io/api/'
+    // this.baseURL = 'https://8b81330f.ngrok.io/api/'
   }
 
   // set state to switch to win/loss component
@@ -57,7 +57,7 @@ export default class App extends React.Component {
   handleWinLossClick = (won) => {
     this.setState({ won: won, fetching: true })
 
-    const url = this.baseURL + 'calls'
+    const url = this.baseURL + 'calls/create'
     // send request
     fetch(url, {
       method: 'POST',
