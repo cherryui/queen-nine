@@ -3,6 +3,7 @@
     "name": "Queen Nine",
     "slug": "queen-nine",
     "sdkVersion": "18.0.0",
-    "privacy": "public"
+    "privacy": "public",
+    "orientation": "portrait"
   }
 }
