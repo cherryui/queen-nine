@@ -185,7 +185,7 @@ export default class App extends React.Component {
       .catch((error) => console.log("ERROR", error))
   }
 
-  // get call info
+  // get call info and set state with it
   getCallInfo = (username) => {
     const url = this.baseURL + 'calls/' + username
 
@@ -220,7 +220,6 @@ export default class App extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     var content = null
     if (this.state.submitted) {
       content = <WonLost
@@ -246,12 +245,14 @@ export default class App extends React.Component {
         >
           <Drawer
             open={this.state.rightDrawerOpen}
-            content={<SignInDrawer 
+            content={<SignInDrawer
               username={this.state.username} 
               fetching={this.state.fetching}
               errors={this.state.errors}
               logInUser={this.logInUser}
               logOutUser={this.logOutUser}
+              userCount={this.state.userCallCount}
+              totalCount={this.state.totalCallCount}
             />}
             tapToClose={true}
             openDrawerOffset={100}

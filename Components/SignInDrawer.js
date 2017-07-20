@@ -29,6 +29,8 @@ export default class SignInDrawer extends React.Component {
       content = (
         <View>
           <Text h3 style={styles.header}>{this.props.username}</Text>
+          <Text style={styles.countText}>Your calls: {this.props.userCount}</Text>
+          <Text style={styles.countText}>Total calls: {this.props.totalCount}</Text>
           <Button
             onPress={() => this.props.logOutUser()}
             title='log out'
@@ -103,5 +105,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 8,
     marginTop: 15
+  },
+
+  countText: {
+    color: 'orange',
+    textAlign: 'center',
+    margin: 8,
+    marginTop: 15,
+    fontSize: 18
   }
 })
