@@ -21,11 +21,14 @@ export default class App extends React.Component {
 
       rightDrawerOpen: false,
       leftDrawerOpen: false,
-      username: null
+
+      username: null,
+      userCallCount: null,
+      totalCallCount: null
     }
 
     // this.baseURL = 'https://queen-nine.herokuapp.com/api/'
-    this.baseURL = 'https://fe6a3a68.ngrok.io/api/'
+    this.baseURL = 'https://06954721.ngrok.io/api/'
   }
 
   // set state to switch to win/loss component
@@ -91,6 +94,7 @@ export default class App extends React.Component {
           this.setState({ fetching: false })
           if (response.ok) {
             this.setState({ submitted: false, won: null, lowerState: null })
+            this.getCallInfo(this.state.username)
           } else {
             return response.json()
           }
@@ -125,7 +129,9 @@ export default class App extends React.Component {
         this.setState({ fetching: false })
         if (response.ok) {
           this.setState({ username: username, errors: null })
+          this.getCallInfo(username)
         } else {
+          console.log(response)
           return response.json()
         }
       })
@@ -167,6 +173,7 @@ export default class App extends React.Component {
         this.setState({ fetching: false })
         if (response.ok) {
           this.setState({ errors: null, username: username })
+          this.getCallInfo(username)
         } else {
           return response.json()
         }
@@ -174,6 +181,22 @@ export default class App extends React.Component {
       // add errors if response is not ok
       .then((responseJSON) => {
         this.setState({ errors: responseJSON.errors })
+      })
+      .catch((error) => console.log("ERROR", error))
+  }
+
+  // get call info
+  getCallInfo = (username) => {
+    const url = this.baseURL + 'calls/' + username
+
+    fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          return response.json()
+        }
+      })
+      .then((responseJSON) => {
+        this.setState({ userCallCount: responseJSON.userCount, totalCallCount: responseJSON.totalCount })
       })
       .catch((error) => console.log("ERROR", error))
   }
@@ -197,6 +220,7 @@ export default class App extends React.Component {
   }
 
   render () {
+    console.log(this.state)
     var content = null
     if (this.state.submitted) {
       content = <WonLost

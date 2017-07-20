@@ -33,7 +33,7 @@ export default class SignInDrawer extends React.Component {
     return (
       <View style={styles.container}>
         <Text h3 style={styles.header}>Create Account</Text>
-        {this.props.username && <Text style={styles.fetchingText}>Signed in as: {this.props.username}</Text>}
+        {this.props.username && <Text style={styles.loggedInText}>Signed in as: {this.props.username}</Text>}
         <FormLabel>Username</FormLabel>
         <FormInput
           ref='username'
@@ -95,5 +95,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 8,
     marginTop: 15
+  },
+
+  loggedInText: {
+    color: 'orange',
+    textAlign: 'center',
+    margin: 8,
+    marginTop: 15,
+    fontSize: 18
   }
 })
